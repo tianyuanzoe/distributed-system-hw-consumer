@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Consumer {
     private static final String QUEUE_NAME = "post_queue";
-    private static final int NUM_THREADS = 300;
+    private static final int NUM_THREADS = 20;
     private static final String USER_NAME = "yuan";
     private static final String PASSWORD = "yuan";
 
