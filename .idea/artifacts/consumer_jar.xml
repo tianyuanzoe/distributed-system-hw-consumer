@@ -3,10 +3,92 @@
     <output-path>$PROJECT_DIR$/out/artifacts/consumer_jar</output-path>
     <root id="archive" name="consumer.jar">
       <element id="module-output" name="consumer" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/checksums/2.25.16/checksums-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/apache-client/2.25.16/apache-client-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-handler/4.1.107.Final/netty-handler-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/http-auth-aws/2.25.16/http-auth-aws-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/http-auth-spi/2.25.16/http-auth-spi-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/http-auth/2.25.16/http-auth-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-transport-classes-epoll/4.1.107.Final/netty-transport-classes-epoll-4.1.107.Final.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/rabbitmq/amqp-client/5.20.0/amqp-client-5.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/dynamodb/2.25.16/dynamodb-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/auth/2.25.16/auth-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-buffer/4.1.107.Final/netty-buffer-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/sdk-core/2.25.16/sdk-core-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/netty-nio-client/2.25.16/netty-nio-client-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/regions/2.25.16/regions-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-common/4.1.107.Final/netty-common-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/protocol-core/2.25.16/protocol-core-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/checksums-spi/2.25.16/checksums-spi-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/metrics-spi/2.25.16/metrics-spi-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/eventstream/eventstream/1.0.1/eventstream-1.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/annotations/2.25.16/annotations-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-codec/4.1.107.Final/netty-codec-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.15/commons-codec-1.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/http-client-spi/2.25.16/http-client-spi-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.2/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/utils/2.25.16/utils-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/identity-spi/2.25.16/identity-spi-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/aws-json-protocol/2.25.16/aws-json-protocol-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/aws-core/2.25.16/aws-core-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-codec-http2/4.1.107.Final/netty-codec-http2-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-resolver/4.1.107.Final/netty-resolver-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/third-party-jackson-core/2.25.16/third-party-jackson-core-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-transport/4.1.107.Final/netty-transport-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/json-utils/2.25.16/json-utils-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-transport-native-unix-common/4.1.107.Final/netty-transport-native-unix-common-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/profiles/2.25.16/profiles-2.25.16.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/io/netty/netty-codec-http/4.1.107.Final/netty-codec-http-4.1.107.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/software/amazon/awssdk/endpoints-spi/2.25.16/endpoints-spi-2.25.16.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.10.1" />
+      <element id="library" level="project" name="Maven: com.rabbitmq:amqp-client:5.20.0" />
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
+      <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+      <element id="library" level="project" name="Maven: io.netty:netty-buffer:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-codec-http2:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-codec-http:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-codec:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-common:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-handler:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-resolver:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-transport-classes-epoll:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-transport-native-unix-common:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-transport:4.1.107.Final" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.13" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.13" />
+      <element id="library" level="project" name="Maven: org.reactivestreams:reactive-streams:1.0.4" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.9" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:2.0.7" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:annotations:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:apache-client:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:auth:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:aws-core:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:aws-json-protocol:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:checksums-spi:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:checksums:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:dynamodb:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:endpoints-spi:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:http-auth-aws:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:http-auth-spi:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:http-auth:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:http-client-spi:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:identity-spi:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:json-utils:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:metrics-spi:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:netty-nio-client:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:profiles:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:protocol-core:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:regions:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:sdk-core:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:third-party-jackson-core:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.awssdk:utils:2.25.16" />
+      <element id="library" level="project" name="Maven: software.amazon.eventstream:eventstream:1.0.1" />
     </root>
   </artifact>
 </component>
