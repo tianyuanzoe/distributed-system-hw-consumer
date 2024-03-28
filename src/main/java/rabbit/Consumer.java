@@ -44,10 +44,13 @@ public class Consumer {
 
     private static final String SKIERDB_TABLE_NAME = "SkierDB";
     private static final String RESORTDB_TABLE_NAME = "ResortDB";
-    private static final int BATCH_SIZE = 25;
+    private static final int BATCH_SIZE = 10;
     private static  BlockingQueue<WriteRequest> skier_db_write_requests = new LinkedBlockingQueue<>();
+    private static  BlockingQueue<WriteRequest> resort_db_write_requests = new LinkedBlockingQueue<>();
+
 
     //  rabbitmq ----> consume ->(write to database)( my rabbitmq really large)
+
 //    rabbitmq ----> consume -> blocking queue(all the records)  -> batch write to database (reduce the length of the rabbitmq)
 
 //private static final String HOST ="localhost";
@@ -61,9 +64,12 @@ public class Consumer {
         factory.setPort(PORT);
         factory.setUsername(USER_NAME);
         factory.setPassword(PASSWORD);
+        factory.setConnectionTimeout(5000);
         Connection connection = factory.newConnection();
         ExecutorService executorService = Executors.newFixedThreadPool(NUM_THREADS);
-        ExecutorService batchExecutorService = Executors.newFixedThreadPool(NUM_THREADS_DB);
+        ExecutorService batchExecutorService1 = Executors.newFixedThreadPool(NUM_THREADS_DB);
+        ExecutorService batchExecutorService2 = Executors.newFixedThreadPool(NUM_THREADS_DB);
+
 
 
         for (int i = 0; i < NUM_THREADS; i++) {
@@ -76,7 +82,7 @@ public class Consumer {
             });
         }
         for (int i = 0; i < NUM_THREADS_DB; i++) {
-            batchExecutorService.submit(() -> {
+            batchExecutorService1.submit(() -> {
                 try {
                     batchWriteToSkierDB();
                 } catch (Exception e) {
@@ -85,11 +91,24 @@ public class Consumer {
                 }
             });
         }
+        for (int i = 0; i < NUM_THREADS_DB; i++) {
+            batchExecutorService2.submit(() -> {
+                try {
+                    batchWriteToResortDB();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
         try{
             executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
-            batchExecutorService.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+            batchExecutorService1.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+            batchExecutorService2.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
             executorService.shutdown();
-            batchExecutorService.shutdown();
+            batchExecutorService1.shutdown();
+            batchExecutorService2.shutdown();
         }catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -105,9 +124,10 @@ public class Consumer {
             String message = new String(delivery.getBody(), "UTF-8");
             System.out.println(" [x] Received '" + message + "'");
             try {
-//                sendToSkierDBRequestQueue(message);
+                sendToSkierDBRequestQueue(message);
+                sendToResortDBRequestQueue(message);
 //                writeToMap(message);
-                writeToDB(message);
+//                writeToDB(message);
             }  finally {
                 count.getAndIncrement();
                 System.out.println(" [x] Done");
@@ -123,9 +143,7 @@ public class Consumer {
         Gson gson = new Gson();
         Response response = gson.fromJson(message, Response.class);
         LiftRide liftRide = response.getLiftRide();
-        long timestampMillis = System.currentTimeMillis();
         int skierID = response.getSkierID();
-        String partitionKey = skierID + "-" + timestampMillis;
         int resortID = response.getResortID();
         int liftID = liftRide.getLiftID();
         int time = liftRide.getTime();
@@ -134,7 +152,6 @@ public class Consumer {
         String sortKey =  seasonID + "-" + resortID + "-" + dayID + "-" + liftID + "-" + time;
 //        table values
         HashMap<String, AttributeValue> itemValues = new HashMap<>();
-        itemValues.put("skierID-timestamp", AttributeValue.builder().s(partitionKey).build());
         itemValues.put("skierID", AttributeValue.builder().n(String.valueOf(skierID)).build());
         itemValues.put("seasonID", AttributeValue.builder().s(seasonID).build());
         itemValues.put("resortID", AttributeValue.builder().n(String.valueOf(resortID)).build());
@@ -147,10 +164,36 @@ public class Consumer {
         WriteRequest writeRequest = WriteRequest.builder().putRequest(putRequest).build();
         skier_db_write_requests.offer(writeRequest);
     }
+    private static void sendToResortDBRequestQueue(String message) {
+        Gson gson = new Gson();
+        Response response = gson.fromJson(message, Response.class);
+        LiftRide liftRide = response.getLiftRide();
+        int skierID = response.getSkierID();
+        int resortID = response.getResortID();
+        int liftID = liftRide.getLiftID();
+        int time = liftRide.getTime();
+        String dayID = response.getDayID();
+        String seasonID = response.getSeasonID();
+//        table values
+        String sortKey =  dayID + "-" + seasonID + "-" + liftID + "-" + time + "-" + skierID;
+        HashMap<String, AttributeValue> itemValues = new HashMap<>();
+        itemValues.put("skierID", AttributeValue.builder().n(String.valueOf(skierID)).build());
+        itemValues.put("seasonID", AttributeValue.builder().s(seasonID).build());
+        itemValues.put("resortID", AttributeValue.builder().n(String.valueOf(resortID)).build());
+        itemValues.put("dayID", AttributeValue.builder().s(dayID).build());
+        itemValues.put("liftID", AttributeValue.builder().n(String.valueOf(liftID)).build());
+        itemValues.put("time", AttributeValue.builder().n(String.valueOf(time)).build());
+        itemValues.put("dayID-seasonID-liftID-time-skierID", AttributeValue.builder().s(
+                sortKey).build());
+        PutRequest putRequest = PutRequest.builder().item(itemValues).build();
+        WriteRequest writeRequest = WriteRequest.builder().putRequest(putRequest).build();
+        resort_db_write_requests.offer(writeRequest);
+    }
+
 
     public static void batchWriteToSkierDB() throws InterruptedException {
 
-            //thread a, b ,c
+        //thread a, b ,c
         while(true) {
             List<WriteRequest> writeRequests = new ArrayList<>();
             for (int i = 0; i < BATCH_SIZE; i++) {
@@ -186,6 +229,45 @@ public class Consumer {
 
 }
 
+    public static void batchWriteToResortDB() throws InterruptedException {
+
+        //thread a, b ,c
+        while(true) {
+            List<WriteRequest> writeRequests = new ArrayList<>();
+            for (int i = 0; i < BATCH_SIZE; i++) {
+                System.out.println("The size of the writeRequests list is " + writeRequests.size());
+                System.out.println("The current Thread is" + Thread.currentThread().getName());
+                writeRequests.add(resort_db_write_requests.take());
+            }
+            BatchWriteItemRequest batchWriteItemRequest = BatchWriteItemRequest.builder().requestItems(Map.of(RESORTDB_TABLE_NAME, writeRequests)).build();
+            try {
+//            batch write(25 items)
+                BatchWriteItemResponse response = dbClient.batchWriteItem(batchWriteItemRequest);
+                System.out.println(RESORTDB_TABLE_NAME + " was successfully updated. The request id is "
+                        + response.responseMetadata().requestId());
+                while (response.unprocessedItems().size() > 0) {
+                    Map<String, List<WriteRequest>> unprocessedItems = response.unprocessedItems();
+                    BatchWriteItemRequest batchWriteItemRequest1 = BatchWriteItemRequest.builder().requestItems(unprocessedItems).build();
+                    response = dbClient.batchWriteItem(batchWriteItemRequest1);
+                }
+            } catch (ResourceNotFoundException e) {
+                System.err.format("Error: The Amazon DynamoDB table \"%s\" can't be found.\n", RESORTDB_TABLE_NAME);
+                System.err.println("Be sure that it exists and that you've typed its name correctly!");
+                System.exit(1);
+            } catch (DynamoDbException e) {
+                System.err.println(e.getMessage());
+                System.exit(1);
+            } finally {
+                writeRequests.clear();
+            }
+        }
+
+
+
+
+    }
+
+
 
 
     private static void writeToMap(String message) {
@@ -209,7 +291,7 @@ public class Consumer {
         int time = liftRide.getTime();
         String dayID = response.getDayID();
         String seasonID = response.getSeasonID();
-        putTtemToTableSkierDB(skierID,resortID,liftID,time,dayID,seasonID);
+//        putTtemToTableSkierDB(skierID,resortID,liftID,time,dayID,seasonID);
 //        putTtemToTableResortDB(skierID,resortID,liftID,time,dayID,seasonID);
 
 
